@@ -1,0 +1,37 @@
+extends ../layouts/default.pug
+
+block page-header
+  h2 Admin
+
+block content
+  .container
+    .row
+      .col-md-6.col-md-offset-3
+        .panel.panel-login
+          .panel-heading
+            .row
+              .col-xs-6
+                a#login-form-link.active.text-center(href="#") 
+            |                         
+            hr
+          |                     
+          .panel-body
+            .row
+              .col-lg-12
+                form#login-form(action="adminsignin", method="post", role="form", style="display: block;")
+                  .form-group
+                    input#username.form-control(type="text", name="email", tabindex="1", placeholder="@", value="" required="true")
+                  |                                     
+                  .form-group
+                    input#password.form-control(type="password", name="password", tabindex="2", placeholder="Password" required="true")
+                  |                                     
+                  .form-group
+                    .row
+                      .col-sm-6.col-sm-offset-3
+                        input#login-submit.form-control.btn.btn-login(type="submit", name="login-submit", tabindex="4", value="Log In")
+                  |                                     
+                  .form-group
+                    .row
+                      .col-lg-12
+                        .text-center
+                          a.forgot-password(href="", tabindex="5") Forgot Password?

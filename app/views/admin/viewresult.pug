@@ -1,0 +1,61 @@
+extends ../layouts/default.pug
+
+block page-header
+   h2 View result of a student: &ensp;
+   a.btn.btn-primary(href='/admindashboard', role='button') Back to Dashboard
+
+block content 
+   input#inputSearch.form-control.center-block(type="email", name="email", placeholder="enter email of the student", required="true")
+   br
+   br
+   div.result
+     
+
+
+block foot
+  script(src="/public/js/jquery-2.2.2.js")
+  script(src="/public/js/bootstrap.min.js")
+  script.
+
+    $(function(){
+      $("#inputSearch").focus();          
+    });
+
+    $(document).keypress(function(e){
+      if(e.which == 13) { 
+        var email = $('#inputSearch').val();
+        $('.result').empty();
+
+        var url = '/admin/viewresult/'+email;
+       
+        $.getJSON( url, function( data ) {
+
+
+          if(data === null) {
+            alert('no student found.. try again');
+            return;
+          }            
+
+          var marksObtained = 0;
+          data.answer.forEach(function(answer){
+            console.log(answer.answeredCorrect);
+            if(answer.answeredCorrect)
+              marksObtained++;
+          });
+
+          $('.result')
+            .append('<h3>Student Name: '+data.name)
+            .append('<h3>Father\'s Name: '+data.fathername)
+            .append('<h3>For Exam: '+data.examcode)
+            .append('<h3>Total Marks: '+data.answer.length)
+            .append('<h3>Marks Obtained: '+marksObtained);
+         
+        });
+
+
+
+      }   
+    });
+
+
+

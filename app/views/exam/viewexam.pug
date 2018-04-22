@@ -1,0 +1,38 @@
+extends ../layouts/default.pug
+
+block page-header
+    h2 Exams Available &ensp;
+      a.btn.btn-danger.que(href='/admin/addquestion', role='button') Add questions
+      a.btn.btn-danger.que(href='/admin/viewquestions', role='button') View questions
+      a.btn.btn-primary(href='/admindashboard', role='button') Back to Dashboard
+
+
+block content      
+  div.viewexam
+
+block foot
+  script(src="/public/js/jquery-2.2.2.js")
+  script(src="/public/js/bootstrap.min.js")
+  script.
+    $(function(){
+        var url = '/api/viewexam';
+        $.getJSON(url, function(json){
+
+          json.forEach( function(element){
+
+            $('.viewexam').append(
+              '<div class="well" data-examcode="'+element.code+'">'+
+
+                '<h3 class="text-center">'+element.name+'</h3>'+
+                '<p class="text-center">'+element.code+'</p>'+
+                '<a href="#" class="text-center"><p>'+
+                  'View registered students'+
+                '</p></a>'+
+
+              '</div>'
+            );
+
+          });
+
+        });
+    });

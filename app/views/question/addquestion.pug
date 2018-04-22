@@ -1,0 +1,35 @@
+extends ../layouts/default.pug
+
+block page-header
+	h2 Enter Question Details &ensp;
+		a.btn.btn-primary(href='/admin/viewquestions', role='button') View Questions
+	a.btn.btn-primary(href='/admindashboard', role='button') Back to Dashboard
+block content
+	form(action="/admin/addquestion", method="POST", role="form")
+		.form-group
+			label(for="title") For exam:
+			input.form-control(name="examcode" type="text", placeholder="examcode" required="true")
+
+			label(for="title") Title:
+			input.form-control(name="title" type="text", placeholder="question tile" required="true")
+
+			label(for="image") Image(optional):
+			input.form-control(name="image" type="text", placeholder="url")
+
+			label(for="option1") Option 1:
+			input.form-control(name="option1" type="text", placeholder="" required="true")
+
+			label(for="option2") Option 2:
+			input.form-control(name="option2" type="text", placeholder="" required="true")
+
+			label(for="option3") Option 3:
+			input.form-control(name="option3" type="text" placeholder="" required="true")
+
+			label(for="option4") Option 4:
+			input.form-control(name="option4" type="text", placeholder="" required="true")
+
+			label(for="correct") Correct Option:
+			input.form-control(name="correct" type="number", placeholder="1/2/3/4")
+
+		button.btn.btn-primary(type="submit") Submit 
+		

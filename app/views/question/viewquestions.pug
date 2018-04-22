@@ -1,0 +1,67 @@
+extends ../layouts/default.pug
+
+block page-header
+   h2 View all Questions for exam: &ensp;
+   a.btn.btn-primary(href='/admindashboard', role='button') Back to Dashboard
+
+block content 
+   input#inputSearch.form-control.center-block(type="text", name="examcode", placeholder="exam code", required="true")
+   br
+   br
+   table(style="width:583px")
+     
+
+
+block foot
+  script(src="/public/js/jquery-2.2.2.js")
+  script(src="/public/js/bootstrap.min.js")
+  script.
+
+    $(function(){
+      $("#inputSearch").focus();          
+    });
+
+    $(document).keypress(function(e){
+      if(e.which == 13) { 
+        var examcode = $('#inputSearch').val();
+
+        $('table').empty();
+
+        var url = '/api/viewquestions';
+        var img = '';
+
+        $.post( url, { 'examcode': examcode}, function(json){
+
+          if(json.length === 0)
+            alert('no questions found');
+          else{
+            json.forEach( function(element, index){
+
+                console.log(element.image);
+                if(element.image )
+                  img = '<td><img class="img-responsive img-rounded" src="'+ element.image +'"/></td>'
+                else
+                  img = '';
+
+                $('table').append(
+                   '<tr><td><div><p class="question">'+ 
+                       (index+1+'. ')+element.title+
+                    '</p><ul><input class="answer" type="radio" name="q1" value="1"><label id="correctString1">'+
+                       element.options[0].name+
+                    '</label><br><input class="answer" type="radio" name="q1" value="0"><label>'+
+                       element.options[1].name+
+                    '</label><br><input class="answer" type="radio" name="q1" value="0"><label>'+
+                       element.options[2].name+
+                    '</label><br><input class="answer" type="radio" name="q1" value="0"><label>'+
+                       element.options[3].name+
+                    '</label></ul></div></td>'+
+                    img
+                  );
+            });
+          }
+        }); 
+      }   
+    });
+
+
+

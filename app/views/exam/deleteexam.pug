@@ -1,0 +1,13 @@
+extends ../layouts/default.pug
+
+block page-header
+	h2 Delete Exam
+	a.btn.btn-primary(href='/admindashboard', role='button') Back to Dashboard
+
+block content
+	form(action="/admin/deleteexam", method="POST", role="form")
+		.form-group
+			label(for="code") Exam Code:
+			input.form-control(name="examcode" type="number", placeholder="123" required="true")
+		button.btn.btn-primary(type="submit") Submit 
+		

@@ -1,0 +1,19 @@
+extends ../layouts/default.pug
+
+block page-header
+  h1.text-center Welcome 
+    span.user #{name} &ensp;
+    a.btn.btn-danger(href='/studentlogout', role='button') Logout!
+
+block content
+  .row.studentdashboard
+    .col-sm-12.col-md-12
+      blockquote
+        p Name: #{name}
+        |  
+        p Father's Name: #{fathername}
+        p Date Of Birth: #{dob}
+        p email: #{email}
+        
+      .form-group
+        a.btn.btn-lg.btn-info(href='/student/giveexam', role='button') Give Exam #{examcode}
