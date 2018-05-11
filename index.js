@@ -9,8 +9,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-// mongoose.connect('mongodb://localhost:8000/auth');
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect('mongodb://localhost:27017/auth');
+// mongoose.connect(process.env.MONGOLAB_URI);
 
 
 // app setup
